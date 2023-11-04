@@ -42,7 +42,7 @@ def text_to_speech_query(payload):
     return response.content
 
 
-@app.route('/img_to_caption', methods=['GET', 'POST'])
+@app.route('/img-to-caption', methods=['GET', 'POST'])
 def img_to_caption():
     if request.method == "POST":
         try:
@@ -68,7 +68,7 @@ def img_to_caption():
 audio_file_count = 0
 
 
-@app.route('/text_to_speech', methods=['GET', 'POST'])
+@app.route('/text-to-speech', methods=['GET', 'POST'])
 def text_to_speech():
     global audio_file_count
     if request.method == 'POST':

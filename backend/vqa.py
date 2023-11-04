@@ -15,7 +15,7 @@ model = ViltForQuestionAnswering.from_pretrained(
 encoding = processor(image, text, return_tensors="pt")
 
 # forward pass
-outputs = model(**encoding, max_new_tokens=10)
+outputs = model(**encoding)
 logits = outputs.logits
 idx = logits.argmax(-1).item()
 print("Predicted answer:", model.config.id2label[idx])

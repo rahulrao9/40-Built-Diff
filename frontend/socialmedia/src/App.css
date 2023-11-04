@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.left-pane {
+  width: 25%;
+  height: 100vh;
+  background-color: #0f1419;
+}
+
+
+.middle-pane{
+  width: 50%;
+  height: 100vh;
+  background-color: #0f1419;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+  box-shadow: 0px 0px 16px grey;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.right-pane {
+  width: 25%;
+  height: 100vh;
+  background-color: #0f1419;
+}

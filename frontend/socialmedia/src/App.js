@@ -9,6 +9,18 @@ import { useEffect, useState } from "react";
 import { useKeyDown } from "./component/useKeyDown";
 import MainApp from "./component/MainApp";
 import Auth from "./component/Auth";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getDocs,
+  collection,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
+import { v4 } from "uuid";
+import { storage } from "./component/config/firebase";
+import { db, auth } from "./component/config/firebase";
 
 function App() {
   const [isImagePost, setIsImagePost] = useState(false);
@@ -24,6 +36,26 @@ function App() {
   const [currImgURL, setCurrImgURL] = useState(
     "https://imgv3.fotor.com/images/slider-image/a-man-holding-a-camera-with-image-filter.jpg"
   );
+  const moviesCollectionRef = collection(db, "post");
+
+  const getPostList = async () => {
+    try {
+      const data = await getDocs(moviesCollectionRef);
+      const filteredData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setPostData(filteredData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  useEffect(() => {
+    console.log(postData);
+  }, [postData]);
+  useEffect(() => {
+    fetchSpeech(genText);
+  }, [genText]);
   const playback = (audio, ctx) => {
     const playSound = ctx.createBufferSource();
     playSound.buffer = audio;
@@ -68,7 +100,7 @@ function App() {
         setGenText(json["img_caption"]);
       })
       .then(() => {
-        fetchSpeech(genText);
+        //fetchSpeech(genText);
       })
       .catch((err) => {
         console.log(err);
@@ -106,20 +138,23 @@ function App() {
     });
   }, []);
   useEffect(() => {
+    getPostList();
+  }, []);
+  useEffect(() => {
     if (isMiddlePaneActive) {
       //fetchSpeech("Posted By Nagraj");
       //fetchSpeech("10 minutes ago");
       //fetchSpeech("Flexing my camera on a sunny weekday");
       //fetchCaption(currImgURL);
       fetchPostData(
-        "Nagraj",
-        "10 minutes ago",
-        "Flexing my camera on a sunny weekday",
-        "This is an image of me clicking a photo of myself",
-        currImgURL
+        postData[currPostIndex]["name"],
+        postData[currPostIndex]["time"],
+        postData[currPostIndex]["caption"],
+        postData[currPostIndex]["alttext"],
+        postData[currPostIndex]["image"]
       );
     }
-  }, [isMiddlePaneActive]);
+  }, [isMiddlePaneActive, currPostIndex]);
   useEffect(() => {
     const sidepaneMap = {
       0: "Home",
@@ -177,6 +212,10 @@ function App() {
       setCurrAddPostOption((prevState) => {
         return prevState + 1;
       });
+    } else if (isMiddlePaneActive && currPostIndex < postData.length - 1) {
+      setCurrPostIndex((prevState) => {
+        return prevState + 1;
+      });
     }
   }, ["ArrowRight"]);
   useKeyDown(() => {
@@ -185,6 +224,10 @@ function App() {
       setIsAddPostActive(!isAddPostActive);
     } else if (isAddPostActive && currAddPostOption > 0) {
       setCurrAddPostOption((prevState) => {
+        return prevState - 1;
+      });
+    } else if (isMiddlePaneActive && currPostIndex > 0) {
+      setCurrPostIndex((prevState) => {
         return prevState - 1;
       });
     }
@@ -212,10 +255,16 @@ function App() {
               currSidePaneOption={currSidePaneOption}
               isMiddlePaneActive={isMiddlePaneActive}
               isImagePost={isImagePost}
-              currPost={currPost}
+              currPost={
+                postData.length != 0 ? postData[currPostIndex] : currPost
+              }
               isAddPostActive={isAddPostActive}
               currAddPostOption={currAddPostOption}
-              currImgURL={currImgURL}
+              currImgURL={
+                postData.length != 0
+                  ? postData[currPostIndex]["image"]
+                  : "https://imgv3.fotor.com/images/slider-image/a-man-holding-a-camera-with-image-filter.jpg"
+              }
               genText={genText}
             />
           }

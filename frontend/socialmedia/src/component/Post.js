@@ -1,7 +1,7 @@
 import { CgProfile } from "react-icons/cg";
 import sample from "./avenue.jpg";
 
-const Post = ({ isMiddlePaneActive, currImgURL }) => {
+const Post = ({ isMiddlePaneActive, currImgURL, currPost }) => {
   return (
     <div
       className={isMiddlePaneActive ? "high-light" : ""}
@@ -25,9 +25,18 @@ const Post = ({ isMiddlePaneActive, currImgURL }) => {
           }}
         >
           <h5 style={{ marginBottom: "0.02em" }}>
-            Post By Person <span style={{ fontSize: "0.6em" }}>Time Ago</span>
+            {currPost.hasOwnProperty("name")
+              ? currPost["name"]
+              : "Post By Person"}{" "}
+            <span style={{ fontSize: "0.6em" }}>
+              {currPost.hasOwnProperty("time") ? currPost["time"] : "Time Ago"}
+            </span>
           </h5>
-          <h6 style={{ marginTop: "0.1em" }}>Description</h6>
+          <h6 style={{ marginTop: "0.1em" }}>
+            {currPost.hasOwnProperty("caption")
+              ? currPost["caption"]
+              : "Description"}
+          </h6>
         </div>
       </div>
       <div>

@@ -19,7 +19,11 @@ const MiddlePane = ({
         isAddPostActive={isAddPostActive}
         currAddPostOption={currAddPostOption}
       />
-      <Post currImgURL={currImgURL} isMiddlePaneActive={isMiddlePaneActive} />
+      <Post
+        currPost={currPost}
+        currImgURL={currImgURL}
+        isMiddlePaneActive={isMiddlePaneActive}
+      />
     </div>
   );
 };

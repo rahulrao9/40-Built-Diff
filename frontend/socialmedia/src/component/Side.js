@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "./logo_nobg.png";
 import Image1 from "./Group.png";
 import Image2 from "./Selected.png";
 import Image3 from "./InvertedExplore.png";
@@ -42,35 +43,61 @@ const styles = {
   },
 };
 
-const ImageGallery = () => {
+const ImageGallery = ({ currSidePaneOption, isSidePaneActive }) => {
   return (
     <div className="left-pane">
       <div style={styles.imageContainer}>
-        <img src={Image1} alt="Image 1" style={styles.image} />
+        {/* <img src={Image1} alt="Image 1" style={styles.image} /> */}
+        <img src={logo} alt="Image 1" style={styles.image} />
       </div>
-      <div style={styles.imageContainer}>
+      <div
+        className={
+          currSidePaneOption === 0 && isSidePaneActive ? "high-light" : ""
+        }
+        style={styles.imageContainer}
+      >
         {/* <Link to="/page2"> */}
         <img src={Image2} alt="Image 2" style={styles.image} />
         {/* </Link> */}
       </div>
-      <div style={styles.imageContainer}>
+      <div
+        className={
+          currSidePaneOption === 1 && isSidePaneActive ? "high-light" : ""
+        }
+        style={styles.imageContainer}
+      >
         {/* <Link to="/page3"> */}
         <img src={Image3} alt="Image 3" style={styles.image} />
         {/* </Link> */}
       </div>
 
-      <div style={styles.imageContainer}>
+      <div
+        className={
+          currSidePaneOption === 2 && isSidePaneActive ? "high-light" : ""
+        }
+        style={styles.imageContainer}
+      >
         {/* <Link to="/page3"> */}
         <img src={Image5} alt="Image 5" style={styles.image} />
         {/* </Link> */}
       </div>
-      <div style={styles.imageContainer}>
+      <div
+        className={
+          currSidePaneOption === 3 && isSidePaneActive ? "high-light" : ""
+        }
+        style={styles.imageContainer}
+      >
         {/* <Link to="/page3"> */}
         <img src={Image4} alt="Image 4" style={styles.image} />
         {/* </Link> */}
       </div>
 
-      <div style={styles.tweetButton}>
+      <div
+        className={
+          currSidePaneOption === 4 && isSidePaneActive ? "high-light" : ""
+        }
+        style={styles.tweetButton}
+      >
         <button placeholder="Tweet" style={styles.tweetButtonStyle}>
           Tweet
         </button>

@@ -1,14 +1,15 @@
 import { CgProfile } from "react-icons/cg";
 import sample from "./avenue.jpg";
 
-const Post = () => {
+const Post = ({ isMiddlePaneActive, currImgURL }) => {
   return (
     <div
+      className={isMiddlePaneActive ? "high-light" : ""}
       style={{
         borderRadius: 6,
         height: "70%",
         width: "90%",
-        boxShadow: "2px 2px 10px grey",
+        boxShadow: "2px 2px 6px grey",
         margin: "auto",
       }}
     >
@@ -20,19 +21,19 @@ const Post = () => {
           style={{
             color: "white",
             fontSize: "1.4em",
+            marginTop: "2.2em",
           }}
         >
           <h5 style={{ marginBottom: "0.02em" }}>
             Post By Person <span style={{ fontSize: "0.6em" }}>Time Ago</span>
           </h5>
-
           <h6 style={{ marginTop: "0.1em" }}>Description</h6>
         </div>
       </div>
       <div>
         <img
           style={{ height: "60%", width: "60%", borderRadius: 8 }}
-          src={sample}
+          src={currImgURL}
         />
       </div>
     </div>

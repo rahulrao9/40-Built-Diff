@@ -3,7 +3,7 @@ import { BsImages } from "react-icons/bs";
 import { BsFiletypeGif } from "react-icons/bs";
 import { PiSmiley } from "react-icons/pi";
 
-const TopMiddleFixedPane = () => {
+const TopMiddleFixedPane = ({ isAddPostActive, currAddPostOption }) => {
   return (
     <div
       className="fixed"
@@ -17,10 +17,18 @@ const TopMiddleFixedPane = () => {
       }}
     >
       <div className="d-flex">
-        <div style={{ margin: "1.2em", fontSize: "2em" }}>
+        <div
+          className={
+            isAddPostActive && currAddPostOption == 0 ? "high-light" : ""
+          }
+          style={{ margin: "1.2em", fontSize: "2em" }}
+        >
           <CgProfile style={{ color: "#1DA1F2" }} />
         </div>
         <input
+          className={
+            isAddPostActive && currAddPostOption == 1 ? "high-light" : ""
+          }
           style={{
             borderRadius: 10,
             width: "70%",
@@ -29,8 +37,11 @@ const TopMiddleFixedPane = () => {
           }}
         />
         <button
+          className={
+            isAddPostActive && currAddPostOption == 2 ? "high-light" : ""
+          }
           style={{
-            margin: "3em",
+            margin: "2em",
             height: "3em",
             borderRadius: 4,
             width: "6em",
@@ -47,13 +58,28 @@ const TopMiddleFixedPane = () => {
         </button>
       </div>
       <div className="d-flex" style={{ margin: "auto", marginTop: "-1.5em" }}>
-        <div style={{ margin: "auto", fontSize: "1.2em" }}>
+        <div
+          className={
+            isAddPostActive && currAddPostOption == 3 ? "high-light" : ""
+          }
+          style={{ margin: "auto", fontSize: "1.2em" }}
+        >
           <BsImages style={{ color: "#1DA1F2" }} />
         </div>
-        <div style={{ margin: "auto", fontSize: "1.2em" }}>
+        <div
+          className={
+            isAddPostActive && currAddPostOption == 4 ? "high-light" : ""
+          }
+          style={{ margin: "auto", fontSize: "1.2em" }}
+        >
           <BsFiletypeGif style={{ color: "#1DA1F2" }} />
         </div>
-        <div style={{ margin: "auto", fontSize: "1.2em" }}>
+        <div
+          className={
+            isAddPostActive && currAddPostOption == 5 ? "high-light" : ""
+          }
+          style={{ margin: "auto", fontSize: "1.2em" }}
+        >
           <PiSmiley style={{ color: "#1DA1F2" }} />
         </div>
       </div>
